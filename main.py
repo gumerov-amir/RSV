@@ -14,7 +14,7 @@ def index(request: Request):
 @app.get("/info/")
 def info():
     mem = psutil.virtual_memory()
-    disk = psutil.disk_usage()
+    disk = psutil.disk_usage("/")
     return {
         "cputemperature": psutil.sensors_temperatures()["cpu_thermal"][0].current,
         "memtotal": mem.total,
