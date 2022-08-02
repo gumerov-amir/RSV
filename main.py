@@ -8,7 +8,7 @@ app = FastAPI(title="SysView", description="A web app for monetoring system stat
 templates = Jinja2Templates(directory="templates")
 
 @app.get("/", response_class=HTMLResponse)
-def index(request: Request, timeout: Query[int] = 10000):
+def index(request: Request, timeout: int = Query(10000)):
     return templates.TemplateResponse("index.html", {"request": request, "timeout": timeout})
 
 @app.get("/info/")
