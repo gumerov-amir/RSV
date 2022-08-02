@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+    <title>RSV</title>
+    <script>
+        function fetch_data() {
+            fetch("{{ url_for('info') }}").then(function(response) {
+                if (response.ok) {
+                    response.json().then(function(json_data) {
+                        mb = 1024*1024;
+                        document.querySelector("#cpupercent").textContent = `${json_data["cpupercent"]}%`;
+                        document.querySelector("#cputemperature").textContent = `${json_data["cputemperature"]}'c`;
+                        document.querySelector("#memtotal").textContent = `${json_data["memtotal"]/mb} MB`;
+                        document.querySelector("#memused").textContent = `${json_data["memused"]/mb} MB`;
+                        document.querySelector("#memavailable").textContent = `${json_data["memavailable"]/mb} MB`;
+                        document.querySelector("#mempercent").textContent = `${json_data["mempercent"]}%`;
+                        document.querySelector("#disktotal").textContent = `${json_data["disktotal"]/mb} MB`;
+                        document.querySelector("#diskused").textContent = `${json_data["diskused"]/mb} MB`;
+                        document.querySelector("#diskavailable").textContent = `${json_data["diskavailable"]/mb} MB`;
+                        document.querySelector("#diskpercent").textContent = `${json_data["diskpercent"]}%`;
+                    });
+                } else {
+                    alert("Cannot get information from server");
+                }
+            }).catch(function(error) {
+                alert(error);
+            });
+        }
+
+        fetch_data();
+        window.onload = function() {
+            setInterval(fetch_data, 10000);
+        };
+    </script>
+</head>
+<body>
+    <h1>RSW</h1>
+    <dl>
+        <dt>CPU</dt>
+        <dd>
+            <dl>
+                <dt>Percent</dt><dd id="cpupercent"></dd>
+                <dt>Temperature</dt><dd id="cputemperature"></dd>
+            </dl>
+        </dd>
+        <dt>Memory</dt>
+        <dd>
+            <dl>
+                <dt>Total</dt><dd id="memtotal"></dd>
+                <dt>Used</dt><dd id="memused"></dd>
+                <dt>Available</dt><dd id="memavailable"></dd>
+                <dt>Percent</dt><dd id="mempercent"></dd>
+            </dl>
+        </dd>
+        <dt>disk</dt>
+        <dd>
+            <dl>
+                <dt>Total</dt><dd id="disktotal"></dd>
+                <dt>Used</dt><dd id="diskused"></dd>
+                <dt>Available</dt><dd id="diskavailable"></dd>
+                <dt>Percent</dt><dd id="diskpercent"></dd>
+            </dl>
+        </dd>
+    </dl>
+</body>
+</html>
