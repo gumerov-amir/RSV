@@ -23,7 +23,7 @@ def info():
         "mem_percent": mem.percent,
         "disktotal": disk.total,
         "diskused": disk.used,
-        "diskavailable": disk.available,
+        "diskavailable": disk.free,
         "diskpercent": disk.percent,
         "cpupercent": psutil.cpu_percent(),
     }
