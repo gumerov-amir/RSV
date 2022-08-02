@@ -16,14 +16,14 @@ def info():
     mem = psutil.virtual_memory()
     disk = psutil.disk_usage("/")
     return {
-        "cputemperature": psutil.sensors_temperatures()["cpu_thermal"][0].current,
-        "memtotal": mem.total,
-        "memused": mem.used,
-        "memavailable": mem.available,
-        "mem_percent": mem.percent,
-        "disktotal": disk.total,
-        "diskused": disk.used,
-        "diskavailable": disk.free,
-        "diskpercent": disk.percent,
+        "cputemperature": round(psutil.sensors_temperatures()["cpu_thermal"][0].current, 2),
+        "memtotal": round(mem.total, 2),
+        "memused": round(mem.used, 2),
+        "memavailable": round(mem.available, 2),
+        "mem_percent": round(mem.percent, 2),
+        "disktotal": round(disk.total, 2),
+        "diskused": round(disk.used, 2),
+        "diskavailable": round(disk.free, 2),
+        "diskpercent": round(disk.percent, 2),
         "cpupercent": psutil.cpu_percent(),
     }
