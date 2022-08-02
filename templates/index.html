@@ -10,13 +10,13 @@
                         mb = 1024*1024;
                         document.querySelector("#cpupercent").textContent = `${json_data["cpupercent"]}%`;
                         document.querySelector("#cputemperature").textContent = `${json_data["cputemperature"]}'c`;
-                        document.querySelector("#memtotal").textContent = `${json_data["memtotal"]/mb} MB`;
-                        document.querySelector("#memused").textContent = `${json_data["memused"]/mb} MB`;
-                        document.querySelector("#memavailable").textContent = `${json_data["memavailable"]/mb} MB`;
-                        document.querySelector("#mempercent").textContent = `${json_data["mempercent"]}%`;
-                        document.querySelector("#disktotal").textContent = `${json_data["disktotal"]/mb} MB`;
-                        document.querySelector("#diskused").textContent = `${json_data["diskused"]/mb} MB`;
-                        document.querySelector("#diskavailable").textContent = `${json_data["diskavailable"]/mb} MB`;
+                        document.querySelector("#memtotal").textContent = `${(json_data["memtotal"]/mb).toFixed(2)} MB`;
+                        document.querySelector("#memused").textContent = `${(json_data["memused"]/mb).toFixed(2)} MB`;
+                        document.querySelector("#memavailable").textContent = `${(json_data["memavailable"]/mb).toFixed(2)} MB`;
+                        document.querySelector("#mempercent").textContent = `${json_data["mempercent"].toFixed(2)}%`;
+                        document.querySelector("#disktotal").textContent = `${(json_data["disktotal"]/mb).toFixed(2)} MB`;
+                        document.querySelector("#diskused").textContent = `${(json_data["diskused"]/mb).toFixed(2)} MB`;
+                        document.querySelector("#diskavailable").textContent = `${(json_data["diskavailable"]/mb).toFixed(2)} MB`;
                         document.querySelector("#diskpercent").textContent = `${json_data["diskpercent"]}%`;
                     });
                 } else {
@@ -29,7 +29,7 @@
 
         fetch_data();
         window.onload = function() {
-            setInterval(fetch_data, 10000);
+            setInterval(fetch_data, {{ timeout }});
         };
     </script>
 </head>
